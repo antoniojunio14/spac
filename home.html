@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/mystyle2.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Cambio de color de fondo */
+            display: flex; /* Usar flexbox para organizar los elementos en la página */
+        }
+
+        .vertical-menu {
+            width: 200px;
+            background-color: #4CAF50; /* Cambio de color del menú */
+            padding-top: 20px;
+            overflow-x: hidden;
+        }
+
+        .vertical-menu a {
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff; /* Cambio de color del texto de enlaces */
+            display: block;
+            transition: 0.3s;
+        }
+
+        .vertical-menu a:hover {
+            background-color: #45a049; /* Cambio de color al pasar el cursor sobre enlaces */
+        }
+
+        .container {
+            flex: 1; /* Hacer que el contenedor ocupe el espacio restante */
+            padding: 20px;
+        }
+    </style>
+    <title>Inicio</title>
+</head>
+<body>
+    <div class="vertical-menu">
+        <a href="registro.php"><i class="fa fa-registered"></i> Registro</a>
+        <a href="perfil_usuario.php"><i class="fa fa-user"></i> Perfil</a>
+        <a href="areas.php"><i class="fa fa-map"></i> Áreas</a>
+        <a href="pago.php"><i class="fa fa-money"></i> Pagos</a>
+        <a href="servicios.php"><i class="fa fa-tags"></i> Servicios</a>
+        <a href="clientes.php"><i class="fa fa-address-book"></i> Clientes</a>
+        <a href="empleado.php"><i class="fa fa-address-book"></i> Empleado</a>
+        <a href="eventos_promociones.php"><i class="fa fa-percent"></i> Promociones</a>
+        <a href="reservas.php"><i class="fa fa-calendar"></i> Reservar</a>
+        <a href="historial_sesiones.php"><i class="fa fa-building"></i> Historial</a> <!-- Agregué ".php" al enlace -->
+        <a href="calificacion_reseña.php"><i class="fa fa-star"></i> Reseñas</a>
+        <a href="login.html"><i class="fa fa-sign-out"></i> Salir</a>
+    </div>
+
+</body>
+</html>
+

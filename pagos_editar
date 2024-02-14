@@ -1,0 +1,80 @@
+<?php
+include("config.php");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_pago'])) {
+    $id_pago = $_POST['id_pago'];
+
+    $id_reserva = $_POST['id_reserva'];
+    $metodo_pago = $_POST['metodo_pago'];
+    $monto_pago = $_POST['monto_pago'];
+    $estado_pago = $_POST['estado_pago'];
+
+    $sql = "UPDATE pagos 
+            SET id_reserva='$id_reserva', metodo_pago='$metodo_pago', monto_pago='$monto_pago', estado='$estado_pago' 
+            WHERE id_pago='$id_pago'";
+
+    if(mysqli_query($mysqli, $sql)) {
+        echo '<script language="javascript">';
+        echo 'alert("Actualizado exitosamente");';
+        echo 'window.location="pagos.php";';
+        echo '</script>';    
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($mysqli);
+    }
+}
+
+// Obtén el ID del pago a editar (debería pasarse desde la página pagos.php)
+$id_pago = $_GET['id'];
+
+// Realiza la consulta para obtener los datos actuales del pago
+$query = "SELECT * FROM pagos WHERE id_pago = $id_pago";
+$result = mysqli_query($mysqli, $query);
+
+// Verifica si se encontraron datos
+if ($row = mysqli_fetch_assoc($result)) {
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pago</title>
+</head>
+
+<body>
+    <h2>EDITAR PAGO</h2>
+    <hr>
+
+    <!-- Creo un formulario para editar los datos del pago -->
+    <form action="actualizar_pago.php" method="POST">
+        <div>
+            <!-- Agrega un campo oculto para el ID del pago -->
+            <input type="hidden" name="id_pago" value="<?php echo $id_pago; ?>" required>
+
+            <label for="id_reserva"><b>ID de Reserva:</b></label>
+            <input type="text" placeholder="Ingrese el ID de la reserva" name="id_reserva" value="<?php echo $row['id_reserva']; ?>" required>
+
+            <label for="metodo_pago"><b>Método de Pago:</b></label>
+            <input type="text" placeholder="Ingrese el método de pago" name="metodo_pago" value="<?php echo $row['metodo_pago']; ?>" required>
+
+            <label for="monto_pago"><b>Monto de Pago:</b></label>
+            <input type="number" placeholder="Ingrese el monto de pago" name="monto_pago" value="<?php echo $row['monto_pago']; ?>" required>
+
+            <label for="estado_pago"><b>Estado de Pago:</b></label>
+            <select name="estado_pago" required>
+                <option value="1" <?php if ($row['estado'] == 1) echo 'selected'; ?>>Activo</option>
+                <option value="0" <?php if ($row['estado'] == 0) echo 'selected'; ?>>Inactivo</option>
+            </select>
+
+            <button type="submit">Actualizar</button>
+        </div>
+    </form>
+</body>
+
+</html>
+<?php
+} else {
+    echo "No se encontraron datos para el pago con ID $id_pago";
+}
+?>
